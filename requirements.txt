@@ -19,3 +19,4 @@ MukeshAPI
 speedtest-cli
 aiohttp
 gitpython
+pytgcalls
