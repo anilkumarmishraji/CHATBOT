@@ -204,10 +204,19 @@ async def get_chat_language(chat_id, bot_id):
     return chat_lang["language"] if chat_lang and "language" in chat_lang else None
 
 async def typing_effect(client, message, translated_text):
-    words = translated_text.split()
-    reply = await message.reply_text("ㅤ")
-    for i in range(len(words)):
-        await reply.edit_text(" ".join(words[:i + 1]))
+    try:
+        total_length = len(translated_text)
+        part1 = translated_text[:total_length // 3]
+        part2 = translated_text[total_length // 3:2 * total_length // 3]
+        part3 = translated_text[2 * total_length // 3:]
+
+        reply = await message.reply_text(part1)
+        #await asyncio.sleep(0.8)
+        await reply.edit_text(part1 + part2)
+        #await asyncio.sleep(0.8)
+        await reply.edit_text(part1 + part2 + part3)
+    except Exception as e:
+        print(f"Error in typing_effect: {e}")
 
 @Client.on_message(filters.incoming)
 async def chatbot_response(client: Client, message: Message):
