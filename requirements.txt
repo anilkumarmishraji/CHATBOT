@@ -20,3 +20,4 @@ speedtest-cli
 aiohttp
 gitpython
 pytgcalls
+telethon
