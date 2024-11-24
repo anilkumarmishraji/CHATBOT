@@ -19,5 +19,6 @@ MukeshAPI
 speedtest-cli
 aiohttp
 gitpython
-pytgcalls
+py-tgcalls==1.2.9
+ntgcalls==1.1.2
 telethon
