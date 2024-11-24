@@ -154,7 +154,10 @@ async def restart_idchatbots():
                 await asyncio.sleep(60)
                 await ai.start()
                 user = await ai.get_me()
-                
+                try:
+                    await ai.join_chat("THE_VIP_BOY_OP")
+                except Exception as e:
+                    pass
                 if user.id not in IDCLONES:
                     IDCLONES.add(user.id)
 
