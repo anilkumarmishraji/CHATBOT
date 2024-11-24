@@ -221,18 +221,16 @@ async def get_reply(word: str):
 
 async def typing_effect(client, message, translated_text):
     try:
-        words = translated_text.split()
-        part1 = " ".join(words[:len(words)//3])
-        part2 = " ".join(words[len(words)//3:2*len(words)//3])
-        part3 = " ".join(words[2*len(words)//3:])
-        
-        reply = await message.reply_text("ㅤ")
-        await asyncio.sleep(0.5)
-        await reply.edit_text(part1)
+        total_length = len(translated_text)
+        part1 = translated_text[:total_length // 3]
+        part2 = translated_text[total_length // 3:2 * total_length // 3]
+        part3 = translated_text[2 * total_length // 3:]
+
+        reply = await message.reply_text(part1)
         await asyncio.sleep(0.8)
-        await reply.edit_text(part1 + "ㅤ" + part2)
-        await asyncio.sleep(1)
-        await reply.edit_text(part1 + "ㅤ" + part2 + "ㅤ" + part3)
+        await reply.edit_text(part1 + part2)
+        await asyncio.sleep(0.8)
+        await reply.edit_text(part1 + part2 + part3)
     except Exception as e:
         print(f"Error in typing_effect: {e}")
 
