@@ -227,9 +227,9 @@ async def typing_effect(client, message, translated_text):
         part3 = translated_text[2 * total_length // 3:]
 
         reply = await message.reply_text(part1)
-        await asyncio.sleep(0.8)
+        #await asyncio.sleep(0.8)
         await reply.edit_text(part1 + part2)
-        await asyncio.sleep(0.8)
+        #await asyncio.sleep(0.8)
         await reply.edit_text(part1 + part2 + part3)
     except Exception as e:
         print(f"Error in typing_effect: {e}")
