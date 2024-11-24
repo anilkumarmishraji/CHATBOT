@@ -220,10 +220,21 @@ async def get_reply(word: str):
 
 
 async def typing_effect(client, message, translated_text):
-    words = translated_text.split()
-    reply = await message.reply_text("ㅤ")
-    for i in range(len(words)):
-        await reply.edit_text(" ".join(words[:i + 1]))
+    try:
+        words = translated_text.split()
+        part1 = " ".join(words[:len(words)//3])
+        part2 = " ".join(words[len(words)//3:2*len(words)//3])
+        part3 = " ".join(words[2*len(words)//3:])
+        
+        reply = await message.reply_text("ㅤ")
+        await asyncio.sleep(0.5)
+        await reply.edit_text(part1)
+        await asyncio.sleep(0.8)
+        await reply.edit_text(part1 + " " + part2)
+        await asyncio.sleep(1)
+        await reply.edit_text(part1 + " " + part2 + " " + part3)
+    except Exception as e:
+        print(f"Error in typing_effect: {e}")
 
 async def get_chat_language(chat_id):
     chat_lang = await lang_db.find_one({"chat_id": chat_id})
