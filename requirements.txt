@@ -5,6 +5,7 @@ motor
 requests
 dnspython
 tgcrypto
+heroku3
 asyncio
 python-dotenv
 lexica-api
