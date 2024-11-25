@@ -281,7 +281,7 @@ async def chatbot_response(client: Client, message: Message):
                         pass
                 else:
                     try:
-                        await client.send_chat_action(chat_id, ChatAction.TYPING)
+                        #await client.send_chat_action(chat_id, ChatAction.TYPING)
                         asyncio.create_task(typing_effect(client, message, translated_text))
                         
                     except:
