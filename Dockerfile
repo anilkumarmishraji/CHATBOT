@@ -1,15 +1,16 @@
-FROM python:latest
+FROM python:3.13-bookworm
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git\
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install -U pip
+WORKDIR /app
 
-COPY . /app/
-WORKDIR /app/
-RUN pip3 install --upgrade pip
-RUN pip3 install -U -r requirements.txt
+COPY requirements.txt ./
+RUN python3 -m pip install --upgrade pip setuptools wheel && \
+    pip3 install --no-cache-dir -r requirements.txt && \
+    rm -rf ~/.cache/pip
 
-CMD bash start
+COPY . .
+
+CMD ["bash", "start"]
