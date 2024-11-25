@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from deep_translator import GoogleTranslator
 from nexichat.database.chats import add_served_chat
 from nexichat.database.users import add_served_user
-from nexichat.database import abuse_list, add_served_cchat, add_served_cuser, chatai
+from nexichat.database import abuse_list, add_served_cchat, add_served_cuser, chatai, load_replies_cache, load_abuse_cache
 from config import MONGO_URL, OWNER_ID
 from nexichat import nexichat, mongo, LOGGER, db
 from nexichat.mplugin.helpers import languages
@@ -25,10 +25,10 @@ blocklist = {}
 message_counts = {}
 
 
-async def load_abuse_cache():
+"""async def load_abuse_cache():
     global abuse_cache
     abuse_cache = [entry['word'] for entry in await abuse_words_db.find().to_list(length=None)]
-
+"""
 async def add_abuse_word(word: str):
     global abuse_cache
     if word not in abuse_cache:
@@ -174,10 +174,10 @@ async def save_reply(original_message: Message, reply_message: Message):
     except Exception as e:
         print(f"Error in save_reply: {e}")
 
-async def load_replies_cache():
+"""async def load_replies_cache():
     global replies_cache
     replies_cache = await chatai.find().to_list(length=None)
-    await load_abuse_cache()
+    await load_abuse_cache()"""
 
 async def remove_abusive_reply(reply_data):
     global replies_cache
