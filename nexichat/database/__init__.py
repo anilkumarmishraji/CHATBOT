@@ -5,4 +5,4 @@ from .clonestats import *
 from .storage import *
 from .sudoers import *
 from .abuse import *
-from .replies import *
+from .zreplies import *
