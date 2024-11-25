@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from deep_translator import GoogleTranslator
 from nexichat.database.chats import add_served_chat
 from nexichat.database.users import add_served_user
-from nexichat.database import abuse_list, add_served_cchat, add_served_cuser, chatai, load_replies_cache, load_abuse_cache
+from nexichat.database import abuse_list, add_served_cchat, add_served_cuser, chatai, replies_cache, abuse_cache, load_replies_cache, load_abuse_cache
 from config import MONGO_URL, OWNER_ID
 from nexichat import nexichat, mongo, LOGGER, db
 from nexichat.mplugin.helpers import languages
@@ -19,8 +19,8 @@ lang_db = db.ChatLangDb.LangCollection
 status_db = db.chatbot_status_db.status
 abuse_words_db = db.abuse_words_db.words
 
-replies_cache = []
-abuse_cache = []
+#replies_cache = []
+#abuse_cache = []
 blocklist = {}
 message_counts = {}
 
