@@ -305,9 +305,7 @@ async def chatbot_response(client: Client, message: Message):
                 elif reply_data["check"] == "voice":
                     await message.reply_voice(reply_data["text"])
                 else:
-                    #await message.reply_text(translated_text)
                     asyncio.create_task(typing_effect(client, message, translated_text))
-                    await client.send_chat_action(chat_id, ChatAction.TYPING)
             else:
                 await message.reply_text("**I don't understand. What are you saying?**")
 
