@@ -211,9 +211,9 @@ async def typing_effect(client, message, translated_text):
         part3 = translated_text[2 * total_length // 3:]
 
         reply = await message.reply_text(part1)
-        #await asyncio.sleep(0.8)
+        await asyncio.sleep(0.01)
         await reply.edit_text(part1 + part2)
-        #await asyncio.sleep(0.8)
+        await asyncio.sleep(0.01)
         await reply.edit_text(part1 + part2 + part3)
     except Exception as e:
         print(f"Error in typing_effect: {e}")
@@ -282,7 +282,8 @@ async def chatbot_response(client: Client, message: Message):
                 else:
                     try:
                         #await message.reply_text(translated_text)
-                        await typing_effect(client, message, translated_text)
+                        asyncio.create_task(typing_effect(client, message, translated_text))
+                        await client.send_chat_action(chat_id, ChatAction.TYPING)
                     except:
                         pass
             else:
