@@ -19,7 +19,7 @@ START = """**
 
 ╔═════════════════╗
 ║ ➻ ᴍʏ ʀᴇᴘᴏ ➪ [ᴄʟɪᴄᴋ ʜᴇʀᴇ](https://github.com/THE-VIP-BOY-OP/VIP-CHATBOT)  
-║ ➻ ᴄʀᴇᴀᴛᴏʀ ➪ [ᴠɪᴘ ✯ ʙᴏʏ](https://t.me/the_vip_boy)                         
+║ ➻ ᴄʀᴇᴀᴛᴏʀ ➪ [ʀᴀᴊᴀ ✯ ᴏᴡɴᴇʀ](https://t.me/ll_Raja_Babu_ll)                         
 ╚═════════════════╝
 **"""
 
